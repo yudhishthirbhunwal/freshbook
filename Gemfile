@@ -29,6 +29,8 @@ gem 'kaminari'
 gem 'devise', '~> 4.7'
 # Faker is used to generate fake data.
 gem 'faker', '~> 2.17'
+# An XML toolkit for Ruby
+gem 'rexml', '~> 3.2'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
