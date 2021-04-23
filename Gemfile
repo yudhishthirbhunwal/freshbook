@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # bootstrap-sass is a Sass-powered version of Bootstrap 3
 gem 'bootstrap-sass', '~> 3.4'
 # Simple authorization solution for Rails which is decoupled from user roles. All permissions are stored in a single location.
-gem 'cancan', '~> 1.6'
+gem 'cancancan'
 # A Scope & Engine based paginator.
 gem 'kaminari'
 # Flexible authentication solution for Rails with Warden.
