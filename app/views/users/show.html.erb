@@ -1,0 +1,12 @@
+<% provide(:title, fullname(@user)) %>
+<div class="row">
+<aside class="col-md-4">
+<section class="user_info">
+<p>Logged in as <strong><%= current_user.email %></strong>.</p>
+<h1>
+<%= gravatar_for @user %>
+<%= fullname(@user) %>
+</h1>
+</section>
+</aside>
+</div>
