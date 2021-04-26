@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
   get '/help', to: 'static_pages#help'
   resources :users, only: [:index, :show]
+  resources :microposts, only: [:create, :destroy]
 end
