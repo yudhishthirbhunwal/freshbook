@@ -5,5 +5,11 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
   get '/help', to: 'static_pages#help'
   resources :users, only: [:index, :show]
-  resources :microposts, only: [:create, :destroy]
+  resources :microposts, only: [:create, :destroy] do
+    resources :likes, only: [:create, :destroy]
+    resources :comments, only: [:new, :create, :destroy]
+  end
+  resources :comments, only: [:new, :create, :destroy] do
+    resources :likes, only: [:create, :destroy]
+  end
 end

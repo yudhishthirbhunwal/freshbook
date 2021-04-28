@@ -1,0 +1,6 @@
+<%= form_with(model: @comment, url: micropost_comments_path, method: "post", local: true) do |f| %>
+<div class="field">
+<%= f.text_area :content, placeholder: "Create new comment..." %>
+</div>
+<%= f.submit "Post", class: "btn btn-secondary" %>
+<% end %>
