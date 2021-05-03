@@ -12,9 +12,9 @@ Posted <%= time_ago_in_words(micropost.created_at) %> ago.
 data: { confirm: "You sure?" } %>
 <% end %>
 </span>
-
+<% if micropost.likes.any? %>
 <span><%= pluralize(micropost.likes.count, "like") %></span>
-
+<% end %>
 <span>
   <%# if current_user.likes.include?(micropost) %>
     <%= link_to "Like", micropost_likes_path(micropost), method: :post %>

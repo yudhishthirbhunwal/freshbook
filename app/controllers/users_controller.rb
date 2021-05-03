@@ -7,5 +7,6 @@ class UsersController < ApplicationController
   def show
   	@user=User.find(params[:id])
     @microposts = @user.microposts.page(params[:page]).per(15)
+    @friendship = Friendship.find_by(friend_id: @user.id, user_id: current_user.id)
   end
 end
