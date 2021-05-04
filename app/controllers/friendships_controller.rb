@@ -1,7 +1,7 @@
 class FriendshipsController < ApplicationController
 
-  def index
-    
+  def friends
+    @friends = current_user.friends
   end
 
   def create
@@ -12,7 +12,11 @@ class FriendshipsController < ApplicationController
 
   def update
     @friend = User.find_by(id: params[:id])
-    accept_request(current_user, @friend)
+    @friendship = Friendship.find_by(user_id: current_user.id, friend_id: @friend.id)
+    @friendship_rev = Friendship.find_by(user_id: @friend.id, friend_id: current_user.id)
+    @friendship.accept_request
+    @friendship_rev.accept_request
+    redirect_back(fallback_location: root_url)
   end
 
   def destroy

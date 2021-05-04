@@ -12,18 +12,11 @@ class Friendship < ApplicationRecord
   validates_uniqueness_of :user_id, scope: :friend_id
   after_destroy :destroy_inverse
 
+  def accept_request
+    self.update_attribute(:status, 'accepted')
+  end
+
   private
-
-    def accept_request(user, friend)
-      accept_one_side(user, friend)
-      accept_one_side(friend, user)
-    end
-
-    def accept_one_side(current_user, friend)
-      request = Friendship.find_by(user_id: current_user.id, friend_id: friend.id)
-      request.status = 'accepted'
-      request.save!
-    end
 
     def create_inverse
       self.class.create(user_id: self.friend.id, friend_id: self.user.id, status: 'pending')      

@@ -11,5 +11,9 @@ Rails.application.routes.draw do
   end
   resources :likes, only: :destroy
   resources :comments, only: [:new, :create, :destroy]
-  resources :friendships
+  resources :friendships, only: [:create, :update, :destroy] do
+    member do
+      get 'friends'
+    end
+  end
 end

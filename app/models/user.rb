@@ -15,6 +15,9 @@ class User < ApplicationRecord
 
   # Defines a proto-feed.
   def feed
-    Micropost.where("user_id = ?", id)
+    friend_ids = "SELECT friend_id FROM friendships
+                  WHERE status = 'accepted'"
+    Micropost.where("user_id IN (#{friend_ids})
+                      OR user_id = :user_id", user_id: id)
   end
 end
