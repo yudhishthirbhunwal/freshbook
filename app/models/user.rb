@@ -15,9 +15,14 @@ class User < ApplicationRecord
 
   # Defines a proto-feed.
   def feed
-    friend_ids = "SELECT friend_id FROM friendships
+    feed_ids = "SELECT DISTINCT user_id FROM friendships
                   WHERE status = 'accepted'"
-    Micropost.where("user_id IN (#{friend_ids})
-                      OR user_id = :user_id", user_id: id)
+    Micropost.where("user_id IN (?) OR user_id = ?", feed_ids, id)
+  end
+
+  # Checks if friendship exists with the current user.
+  def is_friend?(user)
+    friendship = Friendship.find_by(user_id: self.id, friend_id: user.id)
+    friendship.present?
   end
 end

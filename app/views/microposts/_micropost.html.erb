@@ -16,11 +16,11 @@ data: { confirm: "You sure?" } %>
 <span><%= pluralize(micropost.likes.count, "like") %></span>
 <% end %>
 <span>
-  <%# if current_user.likes.include?(micropost) %>
+  <% if micropost.likes.find_by(user_id: current_user.id).present? %>
+    <%= link_to "Unlike", like_path(micropost), method: :delete %>
+  <% else %>
     <%= link_to "Like", micropost_likes_path(micropost), method: :post %>
-  <%# else %>
-    <%#= link_to "Unlike", like_path(micropost), method: :delete, data: { confirm: "You sure?" } %>
-  <%# end %>
+  <% end %>
 </span>
 
 <ul>

@@ -1,4 +1,6 @@
 class MicropostsController < ApplicationController
+  
+  load_and_authorize_resource
   before_action :correct_user, only: :destroy
 
   def create

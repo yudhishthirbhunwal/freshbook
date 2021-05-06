@@ -1,7 +1,11 @@
 <li>
   <%= gravatar_for user, size: 50 %>
   <%= link_to fullname(user), user %>
-  <% if current_user.admin? %>
+  <% if !(user == current_user) && !current_user.is_friend?(user) %>
+    <br>
+    <%= link_to 'Add Friend', friendships_path(friend_id: user.id), method: :post %>
+  <% end %>
+  <% if can? :destroy, User %>
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>
   <% end %>
