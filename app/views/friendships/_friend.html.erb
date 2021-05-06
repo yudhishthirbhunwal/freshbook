@@ -4,5 +4,6 @@
     <%= link_to fullname(friend), friend %>
     <br>
     <%= link_to 'Remove Friend', friendship_path(friend_id: friend.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <hr>
   <% end %>
 </li>

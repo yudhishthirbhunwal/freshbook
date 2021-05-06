@@ -1,10 +1,8 @@
 <% provide(:title, 'All Friends') %>
 <h1>All Friends</h1>
 <%= paginate @friends %>
-<ul class="users">
-  <% @friends.each do |friend| %>
-    <%= render 'friend' %>
-  <% end %>
+<ul class="friends">
+  <%= render 'friend' %>
 </ul>
 <%= paginate @friends %>
 <% if current_user.pending_friends.any? %>
