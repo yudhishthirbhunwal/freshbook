@@ -12,8 +12,8 @@ class Ability
         can :manage, :all
       end
       if user.present?
-        can :read, [User, Micropost, Like, Comment]
-        can :crud, [Micropost, Like, Comment], user_id: user.id
+        can :read, [User, Micropost, Like, Comment, Friendship]
+        can :crud, [Micropost, Like, Comment, Friendship], user_id: user.id
       end
     #
     # The first argument to `can` is the action you are giving the user

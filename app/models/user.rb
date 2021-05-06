@@ -13,6 +13,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :trackable, :confirmable, :lockable
 
+  validates :firstname, presence: true, length: { maximum: 50 }
+  validates :lastname, presence: true, length: { maximum: 50 }
+  validates :phonenumber, presence: true, length: { minimum: 10, maximum: 10}, format: { with: /[6-9]\d{9}/ }
+
   # Defines a proto-feed.
   def feed
     Micropost.where("user_id IN (SELECT DISTINCT user_id FROM friendships

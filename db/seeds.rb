@@ -9,7 +9,7 @@
 # Create a main sample user.
 User.create!( firstname: "Example",
               lastname: "User",
-              phonenumber: 99999,
+              phonenumber: "9999965655",
               email: "usertestapp@yopmail.com",
               password: "foobar",
               password_confirmation: "foobar",
@@ -20,7 +20,7 @@ User.create!( firstname: "Example",
 29.times do |n|
   firstname = Faker::Name.first_name
   lastname = Faker::Name.last_name
-  phonenumber = 88888
+  phonenumber = "8888815252"
   email = "usertestapp-#{n+1}@yopmail.com"
   password = "foobar"
   User.create!( firstname: firstname,

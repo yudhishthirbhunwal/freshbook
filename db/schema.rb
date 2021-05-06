@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2021_05_03_072846) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "firstname"
     t.string "lastname"
-    t.integer "phonenumber"
+    t.string "phonenumber"
     t.boolean "admin", default: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
