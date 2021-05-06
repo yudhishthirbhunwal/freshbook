@@ -10,29 +10,31 @@
 User.create!( firstname: "Example",
               lastname: "User",
               phonenumber: 99999,
-              email: "user@example.com",
+              email: "usertestapp@yopmail.com",
               password: "foobar",
               password_confirmation: "foobar",
+              confirmed_at: Time.now.utc,
               admin: true )
 
 # Generate a bunch of additional users.
-99.times do |n|
+29.times do |n|
   firstname = Faker::Name.first_name
   lastname = Faker::Name.last_name
   phonenumber = 88888
-  email = "user-#{n+1}@example.com"
-  password = "password"
+  email = "usertestapp-#{n+1}@yopmail.com"
+  password = "foobar"
   User.create!( firstname: firstname,
                 lastname: lastname,
                 phonenumber: phonenumber,
                 email: email,
                 password: password,
-                password_confirmation: password )
+                password_confirmation: password,
+                confirmed_at: Time.now.utc )
 end
 
 # Generate microposts for a subset of users.
-users = User.order(:created_at).take(6)
-50.times do
+users = User.order(:created_at).take(10)
+30.times do
   content = Faker::Lorem.sentence(word_count: 5)
   users.each { |user| user.microposts.create!(content: content) }
 end
