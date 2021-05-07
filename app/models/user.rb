@@ -13,9 +13,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :trackable, :confirmable, :lockable
 
+  VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  VALID_PHONE_REGEX = /[6-9]\d{9}/
   validates :firstname, presence: true, length: { maximum: 50 }
   validates :lastname, presence: true, length: { maximum: 50 }
-  validates :phonenumber, presence: true, length: { minimum: 10, maximum: 10}, format: { with: /[6-9]\d{9}/ }
+  validates :phonenumber, presence: true, length: { minimum: 10, maximum: 10}, format: { with: VALID_PHONE_REGEX }
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
 
   # Defines a proto-feed.
   def feed

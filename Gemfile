@@ -32,6 +32,8 @@ gem 'faker', '~> 2.17'
 # An XML toolkit for Ruby
 gem 'rexml', '~> 3.2'
 
+# Validations for active storage database.
+gem 'active_storage_validations', '~> 0.8.9'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
 # Manipulate images with minimal use of memory via ImageMagick / GraphicsMagick

@@ -4,7 +4,12 @@ class LikesController < ApplicationController
   before_action :get_post
 
   def create
-    current_user.likes << @micropost.likes.create
+    if already_liked?
+      flash[:notice] = "You can't like a post more than once."
+    else
+      @micropost.likes.create(user_id: current_user.id)
+      # current_user.likes << @micropost.likes.create
+    end
     redirect_back(fallback_location: root_url)
   end
 
@@ -18,5 +23,9 @@ class LikesController < ApplicationController
 
     def get_post
       @micropost = Micropost.find(params[:micropost_id])
+    end
+
+    def already_liked?
+      Like.where(user_id: current_user.id, micropost_id: params[:micropost_id]).exists?
     end
 end
