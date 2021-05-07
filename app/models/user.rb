@@ -14,7 +14,7 @@ class User < ApplicationRecord
          :trackable, :confirmable, :lockable
 
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  VALID_PHONE_REGEX = /[6-9]\d{9}/
+  VALID_PHONE_REGEX = /\d{10}/
   validates :firstname, presence: true, length: { maximum: 50 }
   validates :lastname, presence: true, length: { maximum: 50 }
   validates :phonenumber, presence: true, length: { minimum: 10, maximum: 10}, format: { with: VALID_PHONE_REGEX }

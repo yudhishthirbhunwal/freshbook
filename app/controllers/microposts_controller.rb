@@ -1,7 +1,7 @@
 class MicropostsController < ApplicationController
   
   load_and_authorize_resource
-  before_action :correct_user, only: :destroy
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -12,6 +12,18 @@ class MicropostsController < ApplicationController
     else
       @feed_items = current_user.feed.page(params[:page]).per(15)
       render 'static_pages/home'
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @micropost.update(micropost_params)
+      flash[:success] = "Micropost updated!"
+      redirect_to root_url
+    else
+      render 'edit'
     end
   end
 

@@ -5,12 +5,20 @@
 </span>
 <span class="timestamp">
 Posted <%= time_ago_in_words(comment.created_at) %> ago.
+<% if comment.created_at != comment.updated_at %>
+  Edited.
+<% end %>
+<% if can? :update, Comment %>
+<%= link_to "edit", edit_comment_path(comment) %>
+<%  end %>
 <% if can? :destroy, Comment %>
 <%= link_to "delete", comment_path(comment), method: :delete,
 data: { confirm: "You sure?" } %>
 <%  end %>
 </span>
-<!-- <span>
+<!--
+<span>
   <%#= link_to "Like", comment_likes_path(comment) %>
-</span> -->
+</span>
+-->
 </li>

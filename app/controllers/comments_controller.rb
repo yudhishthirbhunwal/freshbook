@@ -19,6 +19,20 @@ class CommentsController < ApplicationController
     end
   end
 
+  def edit
+    @comment = Comment.find_by(id: params[:id])
+  end
+
+  def update
+    @comment = Comment.find_by(id: params[:id])
+    if @comment.update(comment_params)
+      flash[:success] = "Comment updated!"
+      redirect_to root_url
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @comment = Comment.find_by(id: params[:id])
     @comment.destroy
