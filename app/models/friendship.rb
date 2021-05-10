@@ -12,9 +12,6 @@ class Friendship < ApplicationRecord
   validates_uniqueness_of :user_id, scope: :friend_id
   after_destroy :destroy_inverse
 
-  def accept_request
-    self.update_attribute(:status, 'accepted')
-  end
 
   private
 

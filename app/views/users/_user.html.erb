@@ -1,7 +1,7 @@
 <li>
   <%= gravatar_for user, size: 50 %>
   <%= link_to fullname(user), user %>
-  <% if !(user == current_user) && !current_user.is_friend?(user) %>
+  <% if !(user == current_user) && !current_user.friend_request_exists?(user) %>
     <br>
     <%= link_to 'Add Friend', friendships_path(friend_id: user.id), method: :post %>
   <% end %>

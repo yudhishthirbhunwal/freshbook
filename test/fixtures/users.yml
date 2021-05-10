@@ -3,9 +3,54 @@
 # This model initially had no columns defined. If you add columns to the
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
-#one: {}
-# column: value
-#
-#two: {}
-# column: value
+
+admin:
+  firstname: Admin
+  lastname: Example
+  phonenumber: 9999999999
+  email: admin@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: DateTime.now
+  admin: true
+
+one:
+  firstname: One
+  lastname: Example
+  phonenumber: 1111111111
+  email: one@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: DateTime.now
+
+two:
+  firstname: Two
+  lastname: Example
+  phonenumber: 9999999999
+  email: two@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: DateTime.now
+
+three:
+  firstname: Three
+  lastname: Example
+  phonenumber: 9999999999
+  email: three@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: DateTime.now
+
+Four:
+  firstname: Four
+  lastname: Example
+  phonenumber: 9999999999
+  email: four@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: DateTime.now
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  firstname: <%= "User #{n}" %>
+  lastname: Example
+  phonenumber: 9876543210
+  email: <%= "user-#{n}@example.com" %>
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'foobar') %>
+  confirmed_at: DateTime.now
+<% end %>

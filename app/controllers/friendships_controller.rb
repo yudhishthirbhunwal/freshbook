@@ -6,23 +6,19 @@ class FriendshipsController < ApplicationController
 
   def create
     @friend = User.find_by(id: params[:friend_id])
-    current_user.requested_friends << @friend
+    current_user.send_request(@friend)
     redirect_back(fallback_location: root_url)
   end
 
   def update
     @friend = User.find_by(id: params[:id])
-    @friendship = Friendship.find_by(user_id: current_user.id, friend_id: @friend.id)
-    @friendship_rev = Friendship.find_by(user_id: @friend.id, friend_id: current_user.id)
-    @friendship.accept_request
-    @friendship_rev.accept_request
+    current_user.accept_request(@friend)
     redirect_back(fallback_location: root_url)
   end
 
   def destroy
     @friend = User.find_by(id: params[:friend_id])
-    current_user.friends.delete(@friend)
-    @friend.friends.delete(current_user)
+    current_user.unfriend(@friend)
     redirect_back(fallback_location: root_url)
   end
 

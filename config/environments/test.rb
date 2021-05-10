@@ -57,4 +57,10 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Define host for mailer.
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+  # Skip configuration mails.
+  config.action_mailer.perform_deliveries = false
 end
