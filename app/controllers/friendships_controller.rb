@@ -1,7 +1,18 @@
 class FriendshipsController < ApplicationController
 
   def friends
-    @friends = current_user.friends.search(params[:search]).page(params[:page]).per(20)
+    if !params[:search].nil?
+      searched_user = current_user.friends.search(params[:search])
+      if searched_user.any?
+        flash.now[:notice] = "#{searched_user.count} friends found!"
+        @friends = searched_user.page(params[:page]).per(20)
+      else
+        flash.now[:alert] = "'#{params[:search]}' user not found in Friends"
+        @friends = current_user.friends.page(params[:page]).per(20)
+      end
+    else
+      @friends = current_user.friends.page(params[:page]).per(20)
+    end
   end
 
   def create

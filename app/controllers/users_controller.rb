@@ -3,7 +3,18 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-  	@users=User.search(params[:search]).page(params[:page]).per(20)
+    if !params[:search].nil?
+      searched_user = User.search(params[:search])
+      if searched_user.any?
+        flash.now[:notice] = "#{searched_user.count} users found!"
+        @users = searched_user.page(params[:page]).per(20)
+      else
+        flash.now[:alert] = "'#{params[:search]}' not found in Users"
+        @users = User.page(params[:page]).per(20)
+      end
+    else
+      @users = User.page(params[:page]).per(20)
+    end
   end
 
   def show
