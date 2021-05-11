@@ -1,8 +1,22 @@
 <% provide(:title, 'All Friends') %>
 <h1>All Friends</h1>
+
+<%= form_tag friends_friendship_path(id: current_user.id), method: "get" do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search by first or last name" %>
+  <%= submit_tag("Search", name: nil) %>
+<% end %>
+<br>
 <%= paginate @friends %>
 <ul class="friends">
-  <%= render 'friend' %>
+  <% @friends.each do |friend| %>
+  <li>
+    <%= gravatar_for friend, size: 50 %>
+    <%= link_to fullname(friend), friend %>
+    <br>
+    <%= link_to 'Remove Friend', friendship_path(friend_id: friend.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <hr>
+  </li>
+  <% end %>
 </ul>
 <%= paginate @friends %>
 <% if current_user.pending_friends.any? %>

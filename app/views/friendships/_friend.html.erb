@@ -1,9 +1,0 @@
-<li>
-  <% current_user.friends.each do |friend| %>
-    <%= gravatar_for friend, size: 50 %>
-    <%= link_to fullname(friend), friend %>
-    <br>
-    <%= link_to 'Remove Friend', friendship_path(friend_id: friend.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-    <hr>
-  <% end %>
-</li>

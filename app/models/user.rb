@@ -59,10 +59,10 @@ class User < ApplicationRecord
       if searched_user
         self.where(id: searched_user.id)
       else
-        User.all
+        self.all
       end
     else
-      User.all
+      self.all
     end    
   end
 
