@@ -1,13 +1,20 @@
 require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  # test "should get index" do
-  #   get users_index_url
-  #   assert_response :success
-  # end
 
-  # test "should get show" do
-  #   get users_show_url
-  #   assert_response :success
-  # end
+  def setup
+    @user = users(:admin)
+    @other_user = users(:one)
+  end
+
+  test "should redirect index when not signed in" do
+    get users_path
+    assert_response :redirect 
+  end
+
+  test "should redirect show when not signed in" do
+    get user_path(@user)
+    assert_response :redirect
+  end
+  
 end

@@ -51,4 +51,19 @@ class User < ApplicationRecord
     self.friends.delete(user)
     user.friends.delete(self)
   end
+
+  # Searchs a particular user.
+  def self.search(search)
+    if search
+      searched_user = User.find_by(firstname: search.titleize) || User.find_by(lastname: search.titleize)
+      if searched_user
+        self.where(id: searched_user.id)
+      else
+        User.all
+      end
+    else
+      User.all
+    end    
+  end
+
 end
