@@ -26,7 +26,10 @@ data: { confirm: "You sure?" } %>
     <%= link_to "Like", micropost_likes_path(micropost), method: :post %>
   <% end %>
 </span>
-
+<% if micropost.comments.any? %>
+<br>
+<strong>Comments:</strong>
+<% end %>
 <ul>
   <%= render micropost.comments %>
 </ul>

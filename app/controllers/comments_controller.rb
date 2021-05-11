@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
     @comment = @micropost.comments.build(comment_params)
     # @comment.micropost_id = @micropost.id
     @comment.user_id = current_user.id
+    @comment.image.attach(params[:comment][:image])
     if @comment.save
       flash[:success] = "Comment created!"
       redirect_to root_url
@@ -43,7 +44,7 @@ class CommentsController < ApplicationController
   private
 
     def comment_params
-      params.require(:comment).permit(:content)
+      params.require(:comment).permit(:content, :image)
     end
 
     def get_post
