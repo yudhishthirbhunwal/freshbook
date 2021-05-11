@@ -5,7 +5,7 @@ class LikesController < ApplicationController
 
   def create
     if already_liked?
-      flash[:notice] = "You can't like a post more than once."
+      flash[:alert] = "You can't like a post more than once."
     else
       @micropost.likes.create(user_id: current_user.id)
       # current_user.likes << @micropost.likes.create

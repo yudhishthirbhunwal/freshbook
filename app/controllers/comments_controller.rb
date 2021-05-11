@@ -13,10 +13,11 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
     @comment.image.attach(params[:comment][:image])
     if @comment.save
-      flash[:success] = "Comment created!"
+      flash[:notice] = "Comment created!"
       redirect_to root_url
     else
-      render 'static_pages/home'
+      flash[:alert] = "Can't comment without content!"
+      redirect_back(fallback_location: root_url)
     end
   end
 
@@ -27,7 +28,7 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find_by(id: params[:id])
     if @comment.update(comment_params)
-      flash[:success] = "Comment updated!"
+      flash[:notice] = "Comment updated!"
       redirect_to root_url
     else
       render 'edit'
@@ -37,7 +38,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find_by(id: params[:id])
     @comment.destroy
-    flash[:success] = "Comment deleted"
+    flash[:alert] = "Comment deleted"
     redirect_to request.referrer || root_url
   end
 

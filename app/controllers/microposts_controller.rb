@@ -7,7 +7,7 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
-      flash[:success] = "Micropost created!"
+      flash[:notice] = "Micropost created!"
       redirect_to root_url
     else
       @feed_items = current_user.feed.page(params[:page]).per(15)
@@ -20,7 +20,7 @@ class MicropostsController < ApplicationController
 
   def update
     if @micropost.update(micropost_params)
-      flash[:success] = "Micropost updated!"
+      flash[:notice] = "Micropost updated!"
       redirect_to root_url
     else
       render 'edit'
@@ -29,7 +29,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    flash[:success] = "Micropost deleted"
+    flash[:alert] = "Micropost deleted"
     redirect_to request.referrer || root_url
   end
 
