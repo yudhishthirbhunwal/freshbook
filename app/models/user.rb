@@ -55,7 +55,7 @@ class User < ApplicationRecord
   # Searchs a particular user.
   def self.search(search)
     if search
-      self.where("LOWER(firstname) OR LOWER(lastname) LIKE :search", search: search.downcase)
+      self.where("LOWER(firstname) OR LOWER(lastname) LIKE ?", search.downcase)
     else
       self.all
     end    
