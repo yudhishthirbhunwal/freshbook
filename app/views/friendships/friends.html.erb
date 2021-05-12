@@ -19,28 +19,4 @@
   <% end %>
 </ul>
 <%= paginate @friends %>
-<% if current_user.pending_friends.any? %>
-  <h2>Incoming Requests</h2>
-  <ul>
-    <% current_user.pending_friends.each do |friend| %>
-      <li>
-        <strong><%= fullname(friend) %></strong>
-        <br>
-        <span><%= link_to 'Accept Request', friendship_path(id: friend.id), method: :patch %></span>
-        <span><%= link_to 'Reject Request', friendship_path(friend_id: friend.id), method: :delete, data: { confirm: 'You sure?' } %></span>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-<% if current_user.requested_friends.any? %>
-  <h2>Outgoing Requests</h2>
-  <ul>
-    <% current_user.requested_friends.each do |friend| %>
-    <li>
-      <strong><%= fullname(friend) %></strong>
-      <br>
-      <span><%= link_to 'Cancel Request', friendship_path(friend_id: friend.id), method: :delete, data: { confirm: 'Are you sure?' } %></span>
-    </li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'shared/friend_requests' %>

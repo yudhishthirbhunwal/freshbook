@@ -22,9 +22,7 @@ class User < ApplicationRecord
 
   # Defines a feed.
   def feed
-    Micropost.where("user_id IN (SELECT DISTINCT user_id FROM friendships
-                                 WHERE status = 'accepted')
-                                 OR user_id = ?", id)
+    Micropost.where(user_id: self.friends).or(Micropost.where(user_id: self))
   end
 
   # Checks if a request has been sent.

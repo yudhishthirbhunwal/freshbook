@@ -1,8 +1,6 @@
-<h2>Friend Requests</h2>
-<hr>
-<strong>Incoming Requests</strong>
-<br>
+<h2>Incoming Requests</h2>
 <% current_user.pending_friends.each do |friend| %>
+<li>
   <%= fullname(friend) %>
   <%= form_with url: friendship_path(id: friend.id), local: true, method: :patch do |f| %>
     <%= f.submit "Accept Request", class: "btn btn-primary" %>
@@ -10,13 +8,15 @@
   <%= form_with url: friendship_path(id: friend.id), local: true, method: :delete do |f| %>
     <%= f.submit "Reject Request", class: "btn btn-primary" %>
   <% end %>
+</li>
 <% end %>
-<hr>
-<strong>Outgoing Requests</strong>
-<br>
+<li class="divider"></li>
+<h2>Outgoing Requests</h2>
 <% current_user.requested_friends.each do |friend| %>
+<li>
   <%= fullname(friend) %>
   <%= form_with url: friendship_path(id: friend.id), local: true, method: :delete do |f| %>
     <%= f.submit "Cancel Request", class: "btn btn-primary" %>
   <% end %>
+</li>
 <% end %>

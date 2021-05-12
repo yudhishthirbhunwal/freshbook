@@ -11,21 +11,21 @@
       <span>+91-<%= @user.phonenumber %></span>
         <br>
         <% if !(@user == current_user) && !@friendship.present? %>
-          <%= link_to 'Add Friend', friendships_path(friend_id: @user.id), method: :post %>
+          <%= link_to 'Add Friend', friendships_path(friend_id: @user.id), method: :post, class: "btn btn-primary" %>
         <% end %>
         <!-- If receiving a friend request --->
         <% if @friendship && @friendship.status == "pending" %>
-          <%= link_to 'Accept Request', friendship_path, method: :patch %>
-          <%= link_to 'Reject Request', friendship_path(friend_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Accept Request', friendship_path, method: :patch, class: "btn btn-primary" %>
+          <%= link_to 'Reject Request', friendship_path(id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
         <!-- If accepted friendship request and friend --->
         <% elsif @friendship && @friendship.status == "accepted" && @friendship.friend == current_user %>
-          <%= link_to 'Remove Friend (You are friend)', friendship_path(friend_id: @friendship.user_id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Remove Friend', friendship_path(id: @friendship.user_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
         <!-- If accepted friendship request and user --->
         <% elsif @friendship && @friendship.status == "accepted" && @friendship.user == current_user %>
-          <%= link_to 'Remove Friend (You are user)', friendship_path(friend_id: @friendship.friend_id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Remove Friend', friendship_path(friend_id: @friendship.friend_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
         <!-- if sending friendship request -->
         <% elsif @friendship %>
-           <%= link_to 'Cancel Request', friendship_path(friend_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+           <%= link_to 'Cancel Request', friendship_path(friend_id: @user.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
         <% end %>
         <br>
     </section>
