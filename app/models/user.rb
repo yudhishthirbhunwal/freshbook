@@ -33,6 +33,11 @@ class User < ApplicationRecord
     friendship.present?
   end
 
+  # Checks if a user is friends with current user.
+  def is_friend?(user)
+    self.friends.include?(user)
+  end
+
   # Sends a request to a user.
   def send_request(user)
     self.requested_friends << user
@@ -48,8 +53,8 @@ class User < ApplicationRecord
 
   # Unfriends a user.
   def unfriend(user)
-    self.friends.delete(user)
-    user.friends.delete(self)
+    friendship = Friendship.find_by(user_id: self.id, friend_id: user.id)
+    friendship.delete
   end
 
   # Searchs a particular user.

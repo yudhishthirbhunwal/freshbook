@@ -10,8 +10,10 @@ Posted <%= time_ago_in_words(micropost.created_at) %> ago.
 <% if micropost.created_at != micropost.updated_at %>
   Edited.
 <% end %>
-<% if current_user == micropost.user %>
+<% if can? :update, micropost %>
 <%= link_to "edit", edit_micropost_path(micropost.id) %>
+<% end %>
+<% if can? :destroy, micropost %>
 <%= link_to "delete", micropost, method: :delete,
 data: { confirm: "You sure?" } %>
 <% end %>

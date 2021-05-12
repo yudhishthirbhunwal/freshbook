@@ -11,10 +11,10 @@ Posted <%= time_ago_in_words(comment.created_at) %> ago.
 <% if comment.created_at != comment.updated_at %>
   Edited.
 <% end %>
-<% if can? :update, Comment %>
+<% if can? :update, comment %>
 <%= link_to "edit", edit_comment_path(comment) %>
 <%  end %>
-<% if can? :destroy, Comment %>
+<% if can? :destroy, comment %>
 <%= link_to "delete", comment_path(comment), method: :delete,
 data: { confirm: "You sure?" } %>
 <%  end %>

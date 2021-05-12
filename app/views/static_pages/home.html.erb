@@ -7,6 +7,13 @@
       <section class="micropost_form">
         <%= render 'shared/micropost_form' %>
       </section>
+      <% if current_user.pending_friends.any? || current_user.requested_friends.any? %>
+        <section>
+          <%# current_user.pending_friends.each do |friend| %>
+              <%= render 'shared/friend_requests' %>
+          <%# end %>
+        </section>
+      <% end %>
     </aside>
     <div class="col-md-8">
       <h3>Micropost Feed</h3>

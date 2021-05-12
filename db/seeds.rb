@@ -17,7 +17,7 @@ User.create!( firstname: "Example",
               admin: true )
 
 # Generate a bunch of additional users.
-29.times do |n|
+49.times do |n|
   firstname = Faker::Name.first_name
   lastname = Faker::Name.last_name
   phonenumber = "8888815252"
@@ -34,7 +34,15 @@ end
 
 # Generate microposts for a subset of users.
 users = User.order(:created_at).take(10)
-30.times do
+50.times do
   content = Faker::Lorem.sentence(word_count: 5)
   users.each { |user| user.microposts.create!(content: content) }
 end
+
+# Create Friend Requests.
+users = User.all
+first_user = users.first
+second_user = users.second
+pending = users[4..10]
+pending.each { |pending| pending.send_request(first_user) }
+pending.each { |pending| pending.send_request(second_user) }

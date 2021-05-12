@@ -5,8 +5,12 @@
     <br>
     <%= link_to 'Add Friend', friendships_path(friend_id: user.id), method: :post %>
   <% end %>
-  <% if can? :destroy, User %>
+  <% if can? :destroy, user %>
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>
+  <% end %>
+  <% if current_user.is_friend?(user) %>
+    <br>
+    (Friends)
   <% end %>
 </li>

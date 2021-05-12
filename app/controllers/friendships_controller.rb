@@ -18,18 +18,22 @@ class FriendshipsController < ApplicationController
   def create
     @friend = User.find_by(id: params[:friend_id])
     current_user.send_request(@friend)
+    flash[:notice] = "Request Sent"
     redirect_back(fallback_location: root_url)
   end
 
   def update
     @friend = User.find_by(id: params[:id])
-    current_user.accept_request(@friend)
+    if current_user.accept_request(@friend)
+      flash[:notice] = "Request Accepted"
+    end
     redirect_back(fallback_location: root_url)
   end
 
   def destroy
-    @friend = User.find_by(id: params[:friend_id])
+    @friend = User.find_by(id: params[:id])
     current_user.unfriend(@friend)
+    flash[:alert] = "Unfriended!!!"
     redirect_back(fallback_location: root_url)
   end
 
