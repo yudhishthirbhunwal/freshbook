@@ -10,6 +10,7 @@ class MicropostsController < ApplicationController
       flash[:notice] = "Micropost created!"
       redirect_to root_url
     else
+      flash.now[:alert] = "Could not create micropost!"
       @feed_items = current_user.feed.page(params[:page]).per(15)
       render 'static_pages/home'
     end
@@ -23,7 +24,8 @@ class MicropostsController < ApplicationController
       flash[:notice] = "Micropost updated!"
       redirect_to root_url
     else
-      render 'edit'
+      flash[:alert] = "Can't edit micropost!"
+      redirect_back(fallback_location: root_url)
     end
   end
 
